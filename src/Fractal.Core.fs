@@ -50,36 +50,36 @@ module Fractal =
             comp.``render <-``(fun _ -> JS.this |> render |> unbox<ReactElement<obj>>)
             comp
 
-        let componentWillMount (cb : unit -> unit) (cmponent : ReactComponent<_,_>) =
-            cmponent.``componentWillMount <-``(fun _ -> cb ())
+        let componentWillMount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+            cmponent.``componentWillMount <-``(fun _ -> JS.this |> cb )
             cmponent
 
-        let componentDidMount (cb : unit -> unit) (cmponent : ReactComponent<_,_>) =
-            cmponent.``componentDidMount <-``(fun _ -> cb ())
+        let componentDidMount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+            cmponent.``componentDidMount <-``(fun _ -> JS.this |> cb)
             cmponent
 
-        let componentWillReceiveProps (cb : 'P -> unit) (cmponent : ReactComponent<'P,_>) =
-            cmponent.``componentWillReceiveProps <-``(fun a _ -> cb a)
+        let componentWillReceiveProps (cb : 'P -> ReactComponent<'P,_> -> unit) (cmponent : ReactComponent<'P,_>) =
+            cmponent.``componentWillReceiveProps <-``(fun a _ -> JS.this |> cb a)
             cmponent
 
-        let shouldComponentUpdate (cb : 'P -> 'S -> bool) (cmponent : ReactComponent<'P,'S>) =
-            cmponent.``shouldComponentUpdate <-``(fun p s _ -> cb p s)
+        let shouldComponentUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S> -> bool) (cmponent : ReactComponent<'P,'S>) =
+            cmponent.``shouldComponentUpdate <-``(fun p s _ -> JS.this |> cb p s)
             cmponent
 
-        let componentWillUpdate (cb : 'P -> 'S -> unit) (cmponent : ReactComponent<'P,'S>) =
-            cmponent.``componentWillUpdate <-``(fun p s _ -> cb p s)
+        let componentWillUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S>  -> unit) (cmponent : ReactComponent<'P,'S>) =
+            cmponent.``componentWillUpdate <-``(fun p s _ -> JS.this |> cb p s)
             cmponent
 
-        let componentDidUpdate (cb : 'P -> 'S -> unit) (cmponent : ReactComponent<'P,'S>) =
-            cmponent.``componentDidUpdate <-``(fun p s _ -> cb p s)
+        let componentDidUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S> -> unit) (cmponent : ReactComponent<'P,'S>) =
+            cmponent.``componentDidUpdate <-``(fun p s _ -> JS.this cb p s)
             cmponent
 
-        let componentWillUnmount (cb : unit -> unit) (cmponent : ReactComponent<_,_>) =
-            cmponent.``componentWillUnmount <-``(fun _ -> cb ())
+        let componentWillUnmount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+            cmponent.``componentWillUnmount <-``(fun _ -> JS.this |> cb )
             cmponent
 
-        let getInitialState (cb : unit -> 'S) (cmponent : ReactComponent<_,'S>) =
-            cmponent.``getInitialState <-``(fun _ -> cb ())
+        let getInitialState (cb : ReactComponent<_,_> -> 'S) (cmponent : ReactComponent<_,'S>) =
+            cmponent.``getInitialState <-``(fun _ -> JS.this |> cb )
             cmponent
 
         let addMaterial (material : mui, tm : ThemeManager) (cmponent : ReactComponent<_,_>) =
