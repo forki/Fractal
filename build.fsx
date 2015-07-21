@@ -35,7 +35,8 @@ Target "Build" (fun _ ->
 
 Target "Publish" (fun _ ->
     StageAll ""
-    Git.Commit.Commit "" (sprintf "%s. Version %s" release.Notes.Head release.AssemblyVersion )
+    Git.Commit.Commit "" (sprintf "Version %s" release.AssemblyVersion )
+    Git.Branches.push ""
 )
 
 "AssemblyInfo"
