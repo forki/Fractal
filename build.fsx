@@ -15,8 +15,7 @@ let release = LoadReleaseNotes "RELEASE_NOTES.md"
 
 let genFSAssemblyInfo (projectPath) =
     let projectName = Path.GetFileNameWithoutExtension(projectPath)
-    let basePath = "src/" + projectName
-    let fileName = basePath + "/AssemblyInfo.fs"
+    let fileName = "src/AssemblyInfo.fs"
     CreateFSharpAssemblyInfo fileName
       [ Attribute.Title (projectName)
         Attribute.Product project
