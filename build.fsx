@@ -8,7 +8,7 @@ open System
 open System.IO
 
 let project = "Fractal"
-let fsProjs =  !! "src/**/*.fsproj"
+let fsProjs =  !! "src/*.fsproj"
 
 Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
