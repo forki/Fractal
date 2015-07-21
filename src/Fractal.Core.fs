@@ -40,57 +40,60 @@ module Helpers =
 module Fractal =
     type Nothing () = class end
 
-    type ReactComponent<'T,'S> () =
+    type FractalComponent<'T,'S> () =
         interface ComponentSpec<'T, 'S>
         interface Component<'T, 'S>
 
-    module React =
-        let defineComponent<'T, 'S> (render : ReactComponent<'T, 'S> -> DOMElement<obj> ) =
-            let comp = ReactComponent<'T, 'S>()
+    module Fractal =
+        let defineComponent<'T, 'S> (render : FractalComponent<'T, 'S> -> DOMElement<obj> ) =
+            let comp = FractalComponent<'T, 'S>()
             comp.``render <-``(fun _ -> JS.this |> render |> unbox<ReactElement<obj>>)
             comp
 
-        let componentWillMount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+        let componentWillMount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
             cmponent.``componentWillMount <-``(fun _ -> JS.this |> cb )
             cmponent
 
-        let componentDidMount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+        let componentDidMount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
             cmponent.``componentDidMount <-``(fun _ -> JS.this |> cb)
             cmponent
 
-        let componentWillReceiveProps (cb : 'P -> ReactComponent<'P,_> -> unit) (cmponent : ReactComponent<'P,_>) =
+        let componentWillReceiveProps (cb : 'P -> FractalComponent<'P,_> -> unit) (cmponent : FractalComponent<'P,_>) =
             cmponent.``componentWillReceiveProps <-``(fun a _ -> JS.this |> cb a)
             cmponent
 
-        let shouldComponentUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S> -> bool) (cmponent : ReactComponent<'P,'S>) =
+        let shouldComponentUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S> -> bool) (cmponent : FractalComponent<'P,'S>) =
             cmponent.``shouldComponentUpdate <-``(fun p s _ -> JS.this |> cb p s)
             cmponent
 
-        let componentWillUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S>  -> unit) (cmponent : ReactComponent<'P,'S>) =
+        let componentWillUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S>  -> unit) (cmponent : FractalComponent<'P,'S>) =
             cmponent.``componentWillUpdate <-``(fun p s _ -> JS.this |> cb p s)
             cmponent
 
-        let componentDidUpdate (cb : 'P -> 'S -> ReactComponent<'P,'S> -> unit) (cmponent : ReactComponent<'P,'S>) =
+        let componentDidUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S> -> unit) (cmponent : FractalComponent<'P,'S>) =
             cmponent.``componentDidUpdate <-``(fun p s _ -> JS.this cb p s)
             cmponent
 
-        let componentWillUnmount (cb : ReactComponent<_,_> -> unit) (cmponent : ReactComponent<_,_>) =
+        let componentWillUnmount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
             cmponent.``componentWillUnmount <-``(fun _ -> JS.this |> cb )
             cmponent
 
-        let getInitialState (cb : ReactComponent<_,_> -> 'S) (cmponent : ReactComponent<_,'S>) =
+        let getInitialState (cb : FractalComponent<_,_> -> 'S) (cmponent : FractalComponent<_,'S>) =
             cmponent.``getInitialState <-``(fun _ -> JS.this |> cb )
             cmponent
 
-        let addMaterial (material : mui, tm : ThemeManager) (cmponent : ReactComponent<_,_>) =
+        let addMaterial (material : mui, tm : ThemeManager) (cmponent : FractalComponent<_,_>) =
             cmponent.``getChildContext <-``(fun _ -> obj ["muiTheme" ==> tm.getCurrentTheme()] )
             cmponent.childContextTypes <- ( obj ["muiTheme" ==> Globals.PropTypes._object.isRequired ] )
             cmponent
 
-        let createComponent (cmponent : ReactComponent<_,_>) =
+        let createComponent (cmponent : FractalComponent<_,_>) =
             cmponent |> unbox<ComponentSpec<_,_>> |> Globals.createClass
 
-        let render (id : string) (cmponent : ClassicElement<_>) =
+        let createElement (props : 'P) (cmponent : ComponentClass<'P>) =
+            Globals.createElement(cmponent, props, null)
+
+        let render (id : string) (cmponent : ReactElement<_>) =
              Globals.render(cmponent, Globals.document.getElementById(id))
              |> ignore
 
