@@ -27,9 +27,9 @@ module Helpers =
         [<FunScript.JSEmitInline("require({0})")>]
         let require (path : string) : 'T = failwith "never"
 
-    let obj (lst : list<string * 'a>) =
+    let obj (lst : array<string * 'a>) =
         let t = Dictionary<string,obj>()
-        lst |> List.iter(fun i -> t.Add(fst i, snd i ))
+        lst |> Array.iter(fun i -> t.Add(fst i, snd i ))
         t :> obj
 
     let (==>) a b = a, box<obj> b
@@ -83,8 +83,8 @@ module Fractal =
             cmponent
 
         let addMaterial (material : mui, tm : ThemeManager) (cmponent : FractalComponent<_,_>) =
-            cmponent.``getChildContext <-``(fun _ -> obj ["muiTheme" ==> tm.getCurrentTheme()] )
-            cmponent.childContextTypes <- ( obj ["muiTheme" ==> Globals.PropTypes._object.isRequired ] )
+            cmponent.``getChildContext <-``(fun _ -> obj [|"muiTheme" ==> tm.getCurrentTheme()|] )
+            cmponent.childContextTypes <- ( obj [| "muiTheme" ==> Globals.PropTypes._object.isRequired |] )
             cmponent
 
         let createComponent (cmponent : FractalComponent<_,_>) =

@@ -46,6 +46,7 @@
     <Compile Include="Bindings.React.fs" />
     <Compile Include="Bindings.Postal.fs" />
     <Compile Include="Bindings.MaterialUI.fs" />
+    <Compile Include="Bindings.Mori.fs" />
     <Compile Include="Fractal.Core.fs" />
     <Compile Include="Fractal.DOM.fs" />
     <None Include="Script.fsx" />
