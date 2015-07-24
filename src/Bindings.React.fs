@@ -6,7 +6,7 @@ namespace FunScript.TypeScript.React
 type AnonymousType443 = interface end
 
 namespace FunScript.TypeScript.React
-type AnonymousType444<'P, 'S> = interface end
+type Reference<'P, 'S> = interface end
 
 namespace FunScript.TypeScript.React
 type AnonymousType445<'P, 'S> = interface end
@@ -222,7 +222,7 @@ namespace FunScript.TypeScript
 module TypeExtensions_react_1 =
 
 
-    type FunScript.TypeScript.React.AnonymousType444<'P, 'S> with
+    type FunScript.TypeScript.React.Reference<'P, 'S> with
 
             [<FunScript.JSEmitInline("({0}[{1}])"); CompiledName("Item_42")>]
             member __.Item with get(i : string) : FunScript.TypeScript.React.Component<obj, obj> = failwith "never" and set (i : string) (v : FunScript.TypeScript.React.Component<obj, obj>) : unit = failwith "never"
@@ -433,7 +433,7 @@ module TypeExtensions_react_11 =
             [<FunScript.JSEmitInline("({0}.context)"); CompiledName("context")>]
             member __.context with get() : obj = failwith "never" and set (v : obj) : unit = failwith "never"
             [<FunScript.JSEmitInline("({0}.refs)"); CompiledName("refs")>]
-            member __.refs with get() : FunScript.TypeScript.React.AnonymousType444<'P, 'S> = failwith "never" and set (v : FunScript.TypeScript.React.AnonymousType444<'P, 'S>) : unit = failwith "never"
+            member __.refs with get() : FunScript.TypeScript.React.Reference<'P, 'S> = failwith "never" and set (v : FunScript.TypeScript.React.Reference<'P, 'S>) : unit = failwith "never"
 
 namespace FunScript.TypeScript
 

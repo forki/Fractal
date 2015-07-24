@@ -9,7 +9,7 @@ open FunScript.TypeScript.Mui
 
 [<ReflectedDefinition>]
 [<AutoOpen>]
-module Helpers =
+module Bindings =
     type Element with
         [<FunScript.JSEmitInline("({0}.value)")>]
         member __.value with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
@@ -20,12 +20,13 @@ module Helpers =
         [<FunScript.JSEmitInline("({0}.checked)")>]
         member __.check with get() : bool = failwith "never" and set (v : bool) : unit = failwith "never"
 
+[<ReflectedDefinition>]
+[<AutoOpen>]
+module internal Helpers =
+
     module JS =
         [<JSEmitInline("this")>]
-        let this<'O> :  'O = failwith "never"
-
-        [<JSEmitInline("undefined")>]
-        let undefined<'O> :  'O = failwith "never"
+        let this<'O> : 'O = failwith "never"
 
         [<FunScript.JSEmitInline("require({0})")>]
         let require (path : string) : 'T = failwith "never"
@@ -40,7 +41,19 @@ module Helpers =
 
 [<ReflectedDefinition>]
 [<AutoOpen>]
-module Fractal =
+module Component =
+    type ClipboardEvent = React.ClipboardEvent
+    type DragEvent = React.DragEvent
+    type FocusEvent = React.FocusEvent
+    type FormEvent = React.FormEvent
+    type KeyboardEvent = React.KeyboardEvent
+    type MouseEvent = React.MouseEvent
+    type TouchEvent = React.TouchEvent
+    type UIEvent = React.UIEvent
+    type WheelEvent = React.WheelEvent
+
+    type Reference<'P,'S> = React.Reference<'P,'S>
+    type DOMElement<'A> = React.DOMElement<'A>
     type Nothing () = class end
 
     type FractalComponent<'T,'S> () =
@@ -58,7 +71,7 @@ module Fractal =
         | ComponentWillUnmount of (FractalComponent<'P,'S> -> unit)
         | GetInitialState of (FractalComponent<'P,'S> -> 'S)
 
-    let private defToTuple d =
+    let internal defToTuple d =
         match d with
         | Render v -> "render" ==> (fun _ -> JS.this |> v)
         | ComponentWillMount v -> "componentWillMount" ==> (fun _ -> JS.this |> v)
@@ -70,37 +83,46 @@ module Fractal =
         | ComponentWillUnmount v -> "componentWillUnmount" ==> (fun _ -> JS.this |> v )
         | GetInitialState v -> "getInitialState" ==> (fun _ -> JS.this |> v )
 
-    let private defsToObj lst =
+    let internal defsToObj lst =
         lst |> Array.map (defToTuple) |> obj
 
-    module Fractal =
+[<ReflectedDefinition>]
+module Fractal =
+    let internal createElement (props : 'P) (cmponent : ComponentClass<'P>) =
+        Globals.createElement(cmponent, props, null)
 
-        let private createElement (props : 'P) (cmponent : ComponentClass<'P>) =
-            Globals.createElement(cmponent, props, null)
+    let createComponent<'P,'S> (lst : FractalDefinition<'P, 'S> []) props=
+        lst |> defsToObj |> unbox<ComponentSpec<'P,'S>> |> Globals.createClass
+        |> createElement props
 
-        let createComponent<'P,'S> (lst : FractalDefinition<'P, 'S> []) props=
-            lst |> defsToObj |> unbox<ComponentSpec<'P,'S>> |> Globals.createClass
-            |> createElement props
+    let findDOMNode (reference : Component<_,_>) =
+        Globals.findDOMNode(reference)
+
+    let render (id : string) (cmponent : ReactElement<_>) =
+         Globals.render(cmponent, Globals.document.getElementById(id))
+         |> ignore
 
 
-        let render (id : string) (cmponent : ReactElement<_>) =
-             Globals.render(cmponent, Globals.document.getElementById(id))
-             |> ignore
+[<ReflectedDefinition>]
+module Message =
+    type Subscription = {
+        topic : string
+        unsubscribe : unit -> unit
+    }
 
-    module Message =
-        let subscribe topic (cb : 'a -> unit) =
-            createEmpty<PostalSubscriptionDefinition>()
-            |> fun n -> n.topic <- topic
-                        n.callback <- Func<_,_,_>(fun n _ -> cb (n |> unbox<'a>) :> obj)
-                        n
-            |> Globals.postal.subscribe
-            |> ignore
+    let subscribe topic (cb : 'a -> unit) =
+        createEmpty<PostalSubscriptionDefinition>()
+        |> fun n -> n.topic <- topic
+                    n.callback <- Func<_,_,_>(fun n _ -> cb (n |> unbox<'a>) :> obj)
+                    n
+        |> Globals.postal.subscribe
+        |> unbox<Subscription>
 
-        let publish topic data =
-            createEmpty<PostalEnvelope> ()
-            |> fun n ->
-                n.topic <- topic
-                n.data <- data
-                n
-            |> Globals.postal.publish
-            |> ignore
+    let publish topic data =
+        createEmpty<PostalEnvelope> ()
+        |> fun n ->
+            n.topic <- topic
+            n.data <- data
+            n
+        |> Globals.postal.publish
+        |> ignore
