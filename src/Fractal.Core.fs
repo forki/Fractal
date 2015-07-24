@@ -24,6 +24,9 @@ module Helpers =
         [<JSEmitInline("this")>]
         let this<'O> :  'O = failwith "never"
 
+        [<JSEmitInline("undefined")>]
+        let undefined<'O> :  'O = failwith "never"
+
         [<FunScript.JSEmitInline("require({0})")>]
         let require (path : string) : 'T = failwith "never"
 
@@ -44,54 +47,41 @@ module Fractal =
         interface ComponentSpec<'T, 'S>
         interface Component<'T, 'S>
 
+    type FractalDefinition<'P, 'S> =
+        | Render of (FractalComponent<'P, 'S> -> DOMElement<obj>)
+        | ComponentWillMount of (FractalComponent<'P,'S> -> unit)
+        | ComponentDidMount of (FractalComponent<'P,'S> -> unit)
+        | ComponentWillReceiveProps of ('P -> FractalComponent<'P,'S> -> unit)
+        | ShouldComponentUpdate of ('P -> 'S -> FractalComponent<'P,'S> -> bool)
+        | ComponentWillUpdate of ('P -> 'S -> FractalComponent<'P,'S>  -> unit)
+        | ComponentDidUpdate of ('P -> 'S -> FractalComponent<'P,'S> -> unit)
+        | ComponentWillUnmount of (FractalComponent<'P,'S> -> unit)
+        | GetInitialState of (FractalComponent<'P,'S> -> 'S)
+
+    let private defToTuple d =
+        match d with
+        | Render v -> "render" ==> (fun _ -> JS.this |> v)
+        | ComponentWillMount v -> "componentWillMount" ==> (fun _ -> JS.this |> v)
+        | ComponentDidMount v -> "componentDidMount" ==> (fun _ -> JS.this |> v )
+        | ComponentWillReceiveProps v -> "componentWillReceiveProps" ==> (fun a _ -> JS.this |> v a)
+        | ShouldComponentUpdate v -> "shouldComponentUpdate" ==> (fun p s _ -> JS.this |> v p s)
+        | ComponentWillUpdate v -> "componentWillUpdate" ==> (fun p s _ -> JS.this |> v p s)
+        | ComponentDidUpdate v -> "componentDidUpdate" ==> (fun p s _ -> JS.this v p s)
+        | ComponentWillUnmount v -> "componentWillUnmount" ==> (fun _ -> JS.this |> v )
+        | GetInitialState v -> "getInitialState" ==> (fun _ -> JS.this |> v )
+
+    let private defsToObj lst =
+        lst |> Array.map (defToTuple) |> obj
+
     module Fractal =
-        let defineComponent<'T, 'S> (render : FractalComponent<'T, 'S> -> DOMElement<obj> ) =
-            let comp = FractalComponent<'T, 'S>()
-            comp.``render <-``(fun _ -> JS.this |> render |> unbox<ReactElement<obj>>)
-            comp
 
-        let componentWillMount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
-            cmponent.``componentWillMount <-``(fun _ -> JS.this |> cb )
-            cmponent
-
-        let componentDidMount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
-            cmponent.``componentDidMount <-``(fun _ -> JS.this |> cb)
-            cmponent
-
-        let componentWillReceiveProps (cb : 'P -> FractalComponent<'P,_> -> unit) (cmponent : FractalComponent<'P,_>) =
-            cmponent.``componentWillReceiveProps <-``(fun a _ -> JS.this |> cb a)
-            cmponent
-
-        let shouldComponentUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S> -> bool) (cmponent : FractalComponent<'P,'S>) =
-            cmponent.``shouldComponentUpdate <-``(fun p s _ -> JS.this |> cb p s)
-            cmponent
-
-        let componentWillUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S>  -> unit) (cmponent : FractalComponent<'P,'S>) =
-            cmponent.``componentWillUpdate <-``(fun p s _ -> JS.this |> cb p s)
-            cmponent
-
-        let componentDidUpdate (cb : 'P -> 'S -> FractalComponent<'P,'S> -> unit) (cmponent : FractalComponent<'P,'S>) =
-            cmponent.``componentDidUpdate <-``(fun p s _ -> JS.this cb p s)
-            cmponent
-
-        let componentWillUnmount (cb : FractalComponent<_,_> -> unit) (cmponent : FractalComponent<_,_>) =
-            cmponent.``componentWillUnmount <-``(fun _ -> JS.this |> cb )
-            cmponent
-
-        let getInitialState (cb : FractalComponent<_,_> -> 'S) (cmponent : FractalComponent<_,'S>) =
-            cmponent.``getInitialState <-``(fun _ -> JS.this |> cb )
-            cmponent
-
-        let addMaterial (material : mui, tm : ThemeManager) (cmponent : FractalComponent<_,_>) =
-            cmponent.``getChildContext <-``(fun _ -> obj [|"muiTheme" ==> tm.getCurrentTheme()|] )
-            cmponent.childContextTypes <- ( obj [| "muiTheme" ==> Globals.PropTypes._object.isRequired |] )
-            cmponent
-
-        let createComponent (cmponent : FractalComponent<_,_>) =
-            cmponent |> unbox<ComponentSpec<_,_>> |> Globals.createClass
-
-        let createElement (props : 'P) (cmponent : ComponentClass<'P>) =
+        let private createElement (props : 'P) (cmponent : ComponentClass<'P>) =
             Globals.createElement(cmponent, props, null)
+
+        let createComponent<'P,'S> (lst : FractalDefinition<'P, 'S> []) props=
+            lst |> defsToObj |> unbox<ComponentSpec<'P,'S>> |> Globals.createClass
+            |> createElement props
+
 
         let render (id : string) (cmponent : ReactElement<_>) =
              Globals.render(cmponent, Globals.document.getElementById(id))
