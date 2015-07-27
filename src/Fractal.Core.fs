@@ -126,3 +126,18 @@ module Message =
             n
         |> Globals.postal.publish
         |> ignore
+
+[<ReflectedDefinition>]
+module Request =
+    let AsyncGetJSON<'T>  (req : Net.WebRequest) = async {
+        let req: FunScript.Core.Web.WebRequest = unbox req
+        req.Headers.Add("Accept", "application/json")
+        let! res = req.AsyncGetResponse ()
+        let stream =  res.GetResponseStream()
+        let data = System.Text.Encoding.UTF8.GetString stream.Contents
+        try
+            let d = Globals.JSON.parse data
+            return (unbox<'T>(d) |> Either.succeed )
+        with
+        | exn -> return Either.Failure [exn]
+    }
