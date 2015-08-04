@@ -61,7 +61,7 @@ module Component =
         interface Component<'T, 'S>
 
     type FractalDefinition<'P, 'S> =
-        | Render of (FractalComponent<'P, 'S> -> DOMElement<obj>)
+        | Render of (FractalComponent<'P, 'S> -> ReactElement<obj>)
         | ComponentWillMount of (FractalComponent<'P,'S> -> unit)
         | ComponentDidMount of (FractalComponent<'P,'S> -> unit)
         | ComponentWillReceiveProps of ('P -> FractalComponent<'P,'S> -> unit)
@@ -87,12 +87,24 @@ module Component =
         lst |> Array.map (defToTuple) |> obj
 
 [<ReflectedDefinition>]
+[<AutoOpen>]
+module Dynamic =
+        [<JSEmitInline("({0}[{1}])")>]
+        let (?) (ob: obj) (prop: string): 'a = failwith "never"
+
+        [<JSEmitInline("({0}[{1}] = {2})")>]
+        let (?<-) (ob: obj) (prop: string) (value: 'a): unit = failwith "never"
+
+[<ReflectedDefinition>]
 module Fractal =
     let internal createElement (props : 'P) (cmponent : ComponentClass<'P>) =
         Globals.createElement(cmponent, props, null)
 
     let createComponent<'P,'S> (lst : FractalDefinition<'P, 'S> []) props=
-        lst |> defsToObj |> unbox<ComponentSpec<'P,'S>> |> Globals.createClass
+        let t = lst |> defsToObj |> unbox<ComponentSpec<'P,'S>>
+        t.setChildContext ()
+        t.setChildContextTypes ()
+        t |> Globals.createClass
         |> createElement props
 
     let findDOMNode (reference : Component<_,_>) =
@@ -140,4 +152,24 @@ module Request =
             return (unbox<'T>(d) |> Either.succeed )
         with
         | exn -> return Either.Failure [exn]
+    }
+
+    let AsyncPostJSON<'T,'R> (data: 'T) (r : Net.WebRequest) = async {
+        let req: FunScript.Core.Web.WebRequest = unbox r
+        req.Headers.Add("Accept", "application/json")
+        req.Headers.Add("Content-Type", "application/json")
+        req.Method <- "POST" 
+        let str = Globals.JSON.stringify data
+        let data = System.Text.Encoding.UTF8.GetBytes str
+        let stream = req.GetRequestStream()
+        stream.Write (data, 0, data.Length )
+        let! res = req.AsyncGetResponse ()
+        let stream =  res.GetResponseStream()
+        let data = System.Text.Encoding.UTF8.GetString stream.Contents
+        try
+            let d = Globals.JSON.parse data
+            return (unbox<'R>(d) |> Either.succeed )
+        with
+        | exn -> return Either.Failure [exn]
+
     }

@@ -14,6 +14,11 @@ open FunScript.TypeScript.React
 [<AutoOpen>]
 module Extensions =
 
+    type Globals with
+        [<FunScript.JSEmitInline("(window.mui)")>]
+        static member mui with get() : FunScript.TypeScript.Mui.mui = failwith "never"
+
+
     type FunScript.TypeScript.Mui.ThemeManager with
         [<FunScript.JSEmitInline("({0}.getCurrentTheme())")>]
         member __.getCurrentTheme() : obj = failwith "never"
@@ -51,10 +56,16 @@ module Extensions =
 
         [<FunScript.JSEmitInline("({0}.AppBar)")>]
         member __.AppBar with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.AppBar)")>]
+        member __.Avatar with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.AppCanvas)")>]
         member __.AppCanvas with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Checkbox)")>]
         member __.Checkbox with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.DatePicker)")>]
+        member __.DatePicker with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Dropdown)")>]
+        member __.Dropdown with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Dialog)")>]
         member __.Dialog with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.DropDownIcon)")>]
@@ -75,6 +86,11 @@ module Extensions =
         member __.Input with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.LeftNav)")>]
         member __.LeftNav with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.List)")>]
+        member __.List with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.ListItem)")>]
+        member __.ListItem with get() : ComponentClass<obj>= failwith "never"
+
         [<FunScript.JSEmitInline("({0}.MenuItem)")>]
         member __.MenuItem with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Menu)")>]
@@ -85,6 +101,19 @@ module Extensions =
         member __.PaperButton with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Paper)")>]
         member __.Paper with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Progress)")>]
+        member __.Progress with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Slider)")>]
+        member __.Slider with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Snackbar)")>]
+        member __.Snackbar with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Tabs)")>]
+        member __.Tabs with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Tab)")>]
+        member __.Tab with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.TimePicker)")>]
+        member __.TimePicker with get() : ComponentClass<obj>= failwith "never"
+
         [<FunScript.JSEmitInline("({0}.RadioButton)")>]
         member __.RadioButton with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.RaisedButton)")>]
@@ -117,7 +146,12 @@ module Extensions =
         [<FunScript.JSEmitInline("({0}.getChildContext())");>]
         member __.getChildContext() : obj = failwith "never"
         [<FunScript.JSEmitInline("({0}.getChildContext = {1})"); >]
-        member __.``getChildContext <-``(func : System.Func<obj>) : unit = failwith "never"
+        member __.``getChildContext <-``(func : unit -> obj) : unit = failwith "never"
+
+        [<FunScript.JSEmitInline("({0}.getChildContext = function(){return { muiTheme: ThemeManager.getCurrentTheme() }})");>]
+        member internal __.setChildContext() : unit = failwith "never"
+        [<FunScript.JSEmitInline("({0}.childContextTypes = { muiTheme: React.PropTypes.object})");>]
+        member internal __.setChildContextTypes() : unit = failwith "never"
 
         [<FunScript.JSEmitInline("({0}.childContextTypes)")>]
         member __.childContextTypes with get() : obj = failwith "never" and set (v : obj) : unit = failwith "never"

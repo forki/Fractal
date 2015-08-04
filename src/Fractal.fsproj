@@ -50,7 +50,7 @@
     <Compile Include="Fractal.Either.fs" />
     <Compile Include="Fractal.Core.fs" />
     <Compile Include="Fractal.DOM.fs" />
-    <None Include="Script.fsx" />
+    <Compile Include="Fractal.DOM.Material.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
