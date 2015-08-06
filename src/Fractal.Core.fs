@@ -158,7 +158,7 @@ module Request =
         let req: FunScript.Core.Web.WebRequest = unbox r
         req.Headers.Add("Accept", "application/json")
         req.Headers.Add("Content-Type", "application/json")
-        req.Method <- "POST" 
+        req.Method <- "POST"
         let str = Globals.JSON.stringify data
         let data = System.Text.Encoding.UTF8.GetBytes str
         let stream = req.GetRequestStream()
@@ -173,3 +173,12 @@ module Request =
         | exn -> return Either.Failure [exn]
 
     }
+
+[<ReflectedDefinition>]
+module Router =
+
+    let add (path : string) (handler : 'a -> unit) =
+        Globals.routie.Invoke(path, handler |> unbox<Function>)
+
+    let navigate (path : string) =
+        Globals.routie.Invoke(path) 
