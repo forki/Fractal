@@ -203,7 +203,7 @@ type SVGAttributes =
         inherit DOMAttributes
 
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_0 =
@@ -216,7 +216,7 @@ module TypeExtensions_react_0 =
             [<FunScript.JSEmitInline("({0}.document)"); CompiledName("document_4")>]
             member __.document with get() : FunScript.TypeScript.Document = failwith "never" and set (v : FunScript.TypeScript.Document) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_1 =
@@ -227,7 +227,7 @@ module TypeExtensions_react_1 =
             [<FunScript.JSEmitInline("({0}[{1}])"); CompiledName("Item_42")>]
             member __.Item with get(i : string) : FunScript.TypeScript.React.Component<obj, obj> = failwith "never" and set (i : string) (v : FunScript.TypeScript.React.Component<obj, obj>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_2 =
@@ -238,7 +238,7 @@ module TypeExtensions_react_2 =
             [<FunScript.JSEmitInline("({0}[{1}])"); CompiledName("Item_43")>]
             member __.Item with get(i : string) : obj = failwith "never" and set (i : string) (v : obj) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_3 =
@@ -249,7 +249,7 @@ module TypeExtensions_react_3 =
             [<FunScript.JSEmitInline("({0}.__html)"); CompiledName("__html")>]
             member __.__html with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_4 =
@@ -294,7 +294,7 @@ module TypeExtensions_react_4 =
             [<FunScript.JSEmitInline("({0}.strokeWidth)"); CompiledName("strokeWidth_1")>]
             member __.strokeWidth with get() : float = failwith "never" and set (v : float) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_5 =
@@ -307,7 +307,7 @@ module TypeExtensions_react_5 =
             [<FunScript.JSEmitInline("({0}.getChildContext = {1})"); CompiledName("getChildContextAux")>]
             member __.``getChildContext <-``(func : System.Func<'CC>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_6 =
@@ -344,7 +344,7 @@ module TypeExtensions_react_6 =
             [<FunScript.JSEmitInline("({0}.replaceProps = {1})"); CompiledName("replacePropsAux")>]
             member __.``replaceProps <-``(func : System.Func<'P, System.Func<obj>, unit>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_7 =
@@ -363,7 +363,7 @@ module TypeExtensions_react_7 =
             [<FunScript.JSEmitInline("({0}.displayName)"); CompiledName("displayName")>]
             member __.displayName with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_8 =
@@ -376,7 +376,7 @@ module TypeExtensions_react_8 =
             [<FunScript.JSEmitInline("({0}.ref)"); CompiledName("_ref")>]
             member __._ref with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_9 =
@@ -391,7 +391,7 @@ module TypeExtensions_react_9 =
             [<FunScript.JSEmitInline("({0}({1}, {2...}))"); CompiledName("Invoke_38")>]
             member __.Invoke(props : 'P, [<System.ParamArray>] children : array<obj>) : FunScript.TypeScript.React.ClassicElement<'P> = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_10 =
@@ -402,7 +402,7 @@ module TypeExtensions_react_10 =
             [<FunScript.JSEmitInline("({0}.clipboardData)"); CompiledName("clipboardData_2")>]
             member __.clipboardData with get() : FunScript.TypeScript.DataTransfer = failwith "never" and set (v : FunScript.TypeScript.DataTransfer) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_11 =
@@ -435,7 +435,7 @@ module TypeExtensions_react_11 =
             [<FunScript.JSEmitInline("({0}.refs)"); CompiledName("refs")>]
             member __.refs with get() : FunScript.TypeScript.React.Reference<'P, 'S> = failwith "never" and set (v : FunScript.TypeScript.React.Reference<'P, 'S>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_12 =
@@ -456,7 +456,7 @@ module TypeExtensions_react_12 =
             [<FunScript.JSEmitInline("({0}.defaultProps)"); CompiledName("defaultProps")>]
             member __.defaultProps with get() : 'P = failwith "never" and set (v : 'P) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_13 =
@@ -493,7 +493,7 @@ module TypeExtensions_react_13 =
             [<FunScript.JSEmitInline("({0}.componentWillUnmount = {1})"); CompiledName("componentWillUnmountAux")>]
             member __.``componentWillUnmount <-``(func : System.Func<unit>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_14 =
@@ -506,7 +506,7 @@ module TypeExtensions_react_14 =
             [<FunScript.JSEmitInline("({0}.render = {1})"); CompiledName("renderAux")>]
             member __.``render <-``(func : System.Func<FunScript.TypeScript.React.ReactElement<obj>>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_15 =
@@ -585,7 +585,7 @@ module TypeExtensions_react_15 =
             [<FunScript.JSEmitInline("({0}.dangerouslySetInnerHTML)"); CompiledName("dangerouslySetInnerHTML")>]
             member __.dangerouslySetInnerHTML with get() : FunScript.TypeScript.React.AnonymousType446 = failwith "never" and set (v : FunScript.TypeScript.React.AnonymousType446) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_16 =
@@ -596,7 +596,7 @@ module TypeExtensions_react_16 =
             [<FunScript.JSEmitInline("({0}.tagName)"); CompiledName("tagName_1")>]
             member __.tagName with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_17 =
@@ -609,7 +609,7 @@ module TypeExtensions_react_17 =
             [<FunScript.JSEmitInline("({0}.ref)"); CompiledName("_ref_1")>]
             member __._ref with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_18 =
@@ -624,7 +624,7 @@ module TypeExtensions_react_18 =
             [<FunScript.JSEmitInline("({0}({1}, {2...}))"); CompiledName("Invoke_40")>]
             member __.Invoke(props : 'P, [<System.ParamArray>] children : array<obj>) : FunScript.TypeScript.React.DOMElement<'P> = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_19 =
@@ -635,7 +635,7 @@ module TypeExtensions_react_19 =
             [<FunScript.JSEmitInline("({0}.dataTransfer)"); CompiledName("dataTransfer_2")>]
             member __.dataTransfer with get() : FunScript.TypeScript.DataTransfer = failwith "never" and set (v : FunScript.TypeScript.DataTransfer) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_20 =
@@ -648,7 +648,7 @@ module TypeExtensions_react_20 =
             [<FunScript.JSEmitInline("({0} = {1})"); CompiledName("Invoke_41Aux")>]
             member __.``Invoke <-``(func : System.Func<'E, unit>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_21 =
@@ -663,7 +663,7 @@ module TypeExtensions_react_21 =
             [<FunScript.JSEmitInline("({0}({1}, {2...}))"); CompiledName("Invoke_43")>]
             member __.Invoke(props : 'P, [<System.ParamArray>] children : array<obj>) : FunScript.TypeScript.React.ReactElement<'P> = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_22 =
@@ -674,7 +674,7 @@ module TypeExtensions_react_22 =
             [<FunScript.JSEmitInline("({0}.relatedTarget)"); CompiledName("relatedTarget_3")>]
             member __.relatedTarget with get() : FunScript.TypeScript.EventTarget = failwith "never" and set (v : FunScript.TypeScript.EventTarget) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_23 =
@@ -891,7 +891,7 @@ module TypeExtensions_react_23 =
             [<FunScript.JSEmitInline("({0}.itemType)"); CompiledName("itemType")>]
             member __.itemType with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_24 =
@@ -926,7 +926,7 @@ module TypeExtensions_react_24 =
             [<FunScript.JSEmitInline("({0}.which)"); CompiledName("which_2")>]
             member __.which with get() : float = failwith "never" and set (v : float) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_25 =
@@ -955,7 +955,7 @@ module TypeExtensions_react_25 =
             [<FunScript.JSEmitInline("({0}.getInitialState = {1})"); CompiledName("getInitialState_1Aux")>]
             member __.``getInitialState <-``(func : System.Func<'S>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_26 =
@@ -994,7 +994,7 @@ module TypeExtensions_react_26 =
             [<FunScript.JSEmitInline("({0}.shiftKey)"); CompiledName("shiftKey_5")>]
             member __.shiftKey with get() : bool = failwith "never" and set (v : bool) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_27 =
@@ -1009,7 +1009,7 @@ module TypeExtensions_react_27 =
             [<FunScript.JSEmitInline("({0}.ref)"); CompiledName("_ref_3")>]
             member __._ref with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_28 =
@@ -1124,7 +1124,7 @@ module TypeExtensions_react_28 =
             [<FunScript.JSEmitInline("(React.Children)"); CompiledName("Children")>]
             static member Children with get() : FunScript.TypeScript.React.anyren = failwith "never" and set (v : FunScript.TypeScript.React.anyren) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_29 =
@@ -1391,7 +1391,7 @@ module TypeExtensions_react_29 =
             [<FunScript.JSEmitInline("({0}.tspan)"); CompiledName("tspan")>]
             member __.tspan with get() : FunScript.TypeScript.React.DOMFactory<FunScript.TypeScript.React.SVGAttributes> = failwith "never" and set (v : FunScript.TypeScript.React.DOMFactory<FunScript.TypeScript.React.SVGAttributes>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_30 =
@@ -1408,7 +1408,7 @@ module TypeExtensions_react_30 =
             [<FunScript.JSEmitInline("({0}.ref)"); CompiledName("_ref_4")>]
             member __._ref with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_31 =
@@ -1459,7 +1459,7 @@ module TypeExtensions_react_31 =
             [<FunScript.JSEmitInline("({0}.shape = {1})"); CompiledName("shape_3Aux")>]
             member __.``shape <-``(func : System.Func<FunScript.TypeScript.React.ValidationMap<obj>, FunScript.TypeScript.React.Requireable<obj>>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_32 =
@@ -1470,7 +1470,7 @@ module TypeExtensions_react_32 =
             [<FunScript.JSEmitInline("({0}.isRequired)"); CompiledName("isRequired")>]
             member __.isRequired with get() : FunScript.TypeScript.React.ValidatorDelegate<'T> = failwith "never" and set (v : FunScript.TypeScript.React.ValidatorDelegate<'T>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_33 =
@@ -1567,7 +1567,7 @@ module TypeExtensions_react_33 =
             [<FunScript.JSEmitInline("({0}.y)"); CompiledName("y_33")>]
             member __.y with get() : float = failwith "never" and set (v : float) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_34 =
@@ -1604,7 +1604,7 @@ module TypeExtensions_react_34 =
             [<FunScript.JSEmitInline("({0}.type)"); CompiledName("_type_40")>]
             member __._type with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_35 =
@@ -1629,7 +1629,7 @@ module TypeExtensions_react_35 =
             [<FunScript.JSEmitInline("({0}.pageY)"); CompiledName("pageY_2")>]
             member __.pageY with get() : float = failwith "never" and set (v : float) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_36 =
@@ -1656,7 +1656,7 @@ module TypeExtensions_react_36 =
             [<FunScript.JSEmitInline("({0}.touches)"); CompiledName("touches")>]
             member __.touches with get() : FunScript.TypeScript.React.TouchList = failwith "never" and set (v : FunScript.TypeScript.React.TouchList) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_37 =
@@ -1677,7 +1677,7 @@ module TypeExtensions_react_37 =
             [<FunScript.JSEmitInline("({0}.identifiedTouch = {1})"); CompiledName("identifiedTouchAux")>]
             member __.``identifiedTouch <-``(func : System.Func<float, FunScript.TypeScript.React.Touch>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_38 =
@@ -1690,7 +1690,7 @@ module TypeExtensions_react_38 =
             [<FunScript.JSEmitInline("({0}.view)"); CompiledName("view_2")>]
             member __.view with get() : FunScript.TypeScript.React.AbstractView = failwith "never" and set (v : FunScript.TypeScript.React.AbstractView) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_39 =
@@ -1701,7 +1701,7 @@ module TypeExtensions_react_39 =
             [<FunScript.JSEmitInline("({0}[{1}])"); CompiledName("Item_46")>]
             member __.Item with get(i : string) : FunScript.TypeScript.React.ValidatorDelegate<'T> = failwith "never" and set (i : string) (v : FunScript.TypeScript.React.ValidatorDelegate<'T>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_40 =
@@ -1714,7 +1714,7 @@ module TypeExtensions_react_40 =
             [<FunScript.JSEmitInline("({0} = {1})"); CompiledName("Invoke_44Aux")>]
             member __.``Invoke <-``(func : System.Func<'T, string, string, FunScript.TypeScript.Error>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_41 =
@@ -1731,7 +1731,7 @@ module TypeExtensions_react_41 =
             [<FunScript.JSEmitInline("({0}.deltaZ)"); CompiledName("deltaZ_1")>]
             member __.deltaZ with get() : float = failwith "never" and set (v : float) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_react_42 =

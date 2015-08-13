@@ -15,11 +15,12 @@ type PostalSubscriptionQuery = interface end
 type PostalChannelDefinition =
     inherit PostalChannel
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module PostalExtensions =
-
+    open FunScript
+    open FunScript.TypeScript
 
     type Globals with
         [<FunScript.JSEmitInline("(window.postal)")>]

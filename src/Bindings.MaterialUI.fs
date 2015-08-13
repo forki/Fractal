@@ -5,7 +5,7 @@ type Styles = interface end
 type ThemeManager = interface end
 type mui = interface end
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 open FunScript
 open FunScript.TypeScript

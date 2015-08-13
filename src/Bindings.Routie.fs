@@ -15,18 +15,18 @@ type Routie =
         inherit RoutieStatic
 
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_0 =
 
 
-    type Globals with
+    type FunScript.TypeScript.Globals with
 
             [<FunScript.JSEmitInline("(window.routie)"); CompiledName("routie")>]
             static member routie with get() : FunScript.TypeScript.routie.Routie = failwith "never" and set (v : FunScript.TypeScript.routie.Routie) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_1 =
@@ -37,7 +37,7 @@ module TypeExtensions_routie_1 =
             [<FunScript.JSEmitInline("({0}[{1}])"); CompiledName("Item_42")>]
             member __.Item with get(i : string) : FunScript.TypeScript.Function = failwith "never" and set (i : string) (v : FunScript.TypeScript.Function) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_2 =
@@ -70,7 +70,7 @@ module TypeExtensions_routie_2 =
             [<FunScript.JSEmitInline("({0}.toURL = {1})"); CompiledName("toURLAux")>]
             member __.``toURL <-``(func : System.Func<obj, string>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_3 =
@@ -81,7 +81,7 @@ module TypeExtensions_routie_3 =
             [<FunScript.JSEmitInline("({0}.silent)"); CompiledName("silent")>]
             member __.silent with get() : bool = failwith "never" and set (v : bool) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_4 =
@@ -102,7 +102,7 @@ module TypeExtensions_routie_4 =
             [<FunScript.JSEmitInline("({0} = {1})"); CompiledName("Invoke_39Aux")>]
             member __.``Invoke <-``(func : System.Func<FunScript.TypeScript.routie.AnonymousType441, unit>) : unit = failwith "never"
 
-namespace FunScript.TypeScript
+namespace Fractal
 
 [<AutoOpen>]
 module TypeExtensions_routie_5 =

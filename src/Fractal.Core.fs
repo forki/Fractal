@@ -10,9 +10,6 @@ open FunScript.TypeScript.Mui
 [<ReflectedDefinition>]
 [<AutoOpen>]
 module Bindings =
-    type Element with
-        [<FunScript.JSEmitInline("({0}.value)")>]
-        member __.value with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
 
     type EventTarget with
         [<FunScript.JSEmitInline("({0}.value)")>]
@@ -42,26 +39,53 @@ module internal Helpers =
 [<ReflectedDefinition>]
 [<AutoOpen>]
 module Component =
-    type ClipboardEvent = React.ClipboardEvent
-    type DragEvent = React.DragEvent
-    type FocusEvent = React.FocusEvent
-    type FormEvent = React.FormEvent
-    type KeyboardEvent = React.KeyboardEvent
-    type MouseEvent = React.MouseEvent
-    type TouchEvent = React.TouchEvent
-    type UIEvent = React.UIEvent
-    type WheelEvent = React.WheelEvent
+    type ClipboardEvent ()=
+        interface React.ClipboardEvent
+    type DragEvent ()=
+        interface React.DragEvent
+    type FocusEvent ()=
+        interface React.FocusEvent
+    type FormEvent ()=
+        interface React.FormEvent
+    type KeyboardEvent ()=
+        interface React.KeyboardEvent
+    type MouseEvent ()=
+        interface React.MouseEvent
+    type TouchEvent ()=
+        interface React.TouchEvent
+    type UIEvent ()=
+        interface React.UIEvent
+    type WheelEvent ()=
+        interface React.WheelEvent
+    type SyntheticEvent () =
+        interface React.SyntheticEvent
 
-    type Reference<'P,'S> = React.Reference<'P,'S>
-    type DOMElement<'A> = React.DOMElement<'A>
     type Nothing () = class end
 
-    type FractalComponent<'T,'S> () =
+
+    type DOMElement<'A> ()=
+        interface React.DOMElement<'A>
+    type FractalElement<'A> = ReactElement<'A>
+
+    type Reference<'P,'S> () =
+       [<FunScript.JSEmitInline("({0}[{1}])")>]
+       member __.Item with get(i : string) : FractalComponent<_, _> = failwith "never"
+    and FractalComponent<'T,'S> () =
         interface ComponentSpec<'T, 'S>
         interface Component<'T, 'S>
 
+        [<FunScript.JSEmitInline("({0}.refs)")>]
+        member __.refs with get() : Reference<_,_> = failwith "never"
+
+    type ReactElement<'P> with
+        [<FunScript.JSEmitInline("({0}.value)")>]
+        member __.value with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
+
+
+
+
     type FractalDefinition<'P, 'S> =
-        | Render of (FractalComponent<'P, 'S> -> ReactElement<obj>)
+        | Render of (FractalComponent<'P, 'S> -> FractalElement<obj>)
         | ComponentWillMount of (FractalComponent<'P,'S> -> unit)
         | ComponentDidMount of (FractalComponent<'P,'S> -> unit)
         | ComponentWillReceiveProps of ('P -> FractalComponent<'P,'S> -> unit)
@@ -98,7 +122,7 @@ module Dynamic =
 [<ReflectedDefinition>]
 module Fractal =
     let internal createElement (props : 'P) (cmponent : ComponentClass<'P>) =
-        Globals.createElement(cmponent, props, null)
+        Globals.createElement(cmponent, props, null) |> unbox<FractalElement<'P>>
 
     let createComponent<'P,'S> (lst : FractalDefinition<'P, 'S> []) props=
         let t = lst |> defsToObj |> unbox<ComponentSpec<'P,'S>>
@@ -107,10 +131,10 @@ module Fractal =
         t |> Globals.createClass
         |> createElement props
 
-    let findDOMNode (reference : Component<_,_>) =
-        Globals.findDOMNode(reference)
+    let findDOMNode<'P> (reference : FractalComponent<_,_>) =
+        Globals.findDOMNode(reference) |> unbox<FractalElement<'P>>
 
-    let render (id : string) (cmponent : ReactElement<_>) =
+    let render (id : string) (cmponent : FractalElement<_>) =
          Globals.render(cmponent, Globals.document.getElementById(id))
          |> ignore
 
@@ -181,4 +205,4 @@ module Router =
         Globals.routie.Invoke(path, handler |> unbox<Function>)
 
     let navigate (path : string) =
-        Globals.routie.Invoke(path) 
+        Globals.routie.Invoke(path)
