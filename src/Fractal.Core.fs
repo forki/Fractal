@@ -67,22 +67,13 @@ module Component =
         interface React.DOMElement<'A>
     type FractalElement<'A> = ReactElement<'A>
 
-    type Reference<'P,'S> () =
-       [<FunScript.JSEmitInline("({0}[{1}])")>]
-       member __.Item with get(i : string) : FractalComponent<_, _> = failwith "never"
-    and FractalComponent<'T,'S> () =
+    type FractalComponent<'T,'S> () =
         interface ComponentSpec<'T, 'S>
         interface Component<'T, 'S>
-
-        [<FunScript.JSEmitInline("({0}.refs)")>]
-        member __.refs with get() : Reference<_,_> = failwith "never"
 
     type ReactElement<'P> with
         [<FunScript.JSEmitInline("({0}.value)")>]
         member __.value with get() : string = failwith "never" and set (v : string) : unit = failwith "never"
-
-
-
 
     type FractalDefinition<'P, 'S> =
         | Render of (FractalComponent<'P, 'S> -> FractalElement<obj>)
@@ -131,7 +122,7 @@ module Fractal =
         t |> Globals.createClass
         |> createElement props
 
-    let findDOMNode<'P> (reference : FractalComponent<_,_>) =
+    let findDOMNode<'P> (reference : Component<_,_>) = 
         Globals.findDOMNode(reference) |> unbox<FractalElement<'P>>
 
     let render (id : string) (cmponent : FractalElement<_>) =
