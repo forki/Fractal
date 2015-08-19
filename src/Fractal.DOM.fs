@@ -8,23 +8,10 @@ open FunScript.TypeScript.React
 [<ReflectedDefinition>]
 [<AutoOpen>]
 module DOM =
-
-
-
     type internal Union = {
         ``_CaseName`` : string
         Item : obj
     }
-
-    let internal unionToTupple du =
-        let lowerFirst = function | "" -> "" | s -> s.Substring(0,1).ToLower() + s.Substring(1)
-
-        let du' = du |> unbox<Union>
-        let name = (du'.``_CaseName``) |> lowerFirst
-        name ==> du'.Item
-
-    let internal attrsToObj lst =
-        lst |> Array.map (unionToTupple) |> obj
 
     type Attr =
         | OnCopy of (Component.ClipboardEvent -> unit)
@@ -165,7 +152,18 @@ module DOM =
         | ItemScope of bool
         | ItemType of string
 
+    let rec internal  unionToTupple du =
+        let lowerFirst = function | "" -> "" | s -> s.Substring(0,1).ToLower() + s.Substring(1)
 
+        let du' = du |> unbox<Union>
+        match du'.Item with
+        | :? Attr -> unionToTupple du'.Item
+        | _ -> let name = (du'.``_CaseName``) |> lowerFirst
+               name ==> du'.Item
+
+
+    let internal attrsToObj lst =
+        lst |> Array.map (unionToTupple) |> obj
 
 
 
@@ -280,4 +278,4 @@ module DOM =
         static member var ((p : Attr[]), [<ParamArray>] c) = Globals.createElement ("var", (attrsToObj p), c) |> unbox<FractalElement<obj>>
         static member video ((p : Attr[]), [<ParamArray>] c) = Globals.createElement ("video", (attrsToObj p), c) |> unbox<FractalElement<obj>>
         static member wbr ((p : Attr[]), [<ParamArray>] c) = Globals.createElement ("wbr", (attrsToObj p), c) |> unbox<FractalElement<obj>>
-        static member Nothing = null |> unbox<Component.DOMElement<obj>> 
+        static member Nothing = null |> unbox<Component.DOMElement<obj>>
