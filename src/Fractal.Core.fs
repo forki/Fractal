@@ -122,7 +122,7 @@ module Fractal =
         t |> Globals.createClass
         |> createElement props
 
-    let findDOMNode<'P> (reference : Component<_,_>) = 
+    let findDOMNode<'P> (reference : Component<_,_>) =
         Globals.findDOMNode(reference) |> unbox<FractalElement<'P>>
 
     let render (id : string) (cmponent : FractalElement<_>) =
@@ -188,12 +188,3 @@ module Request =
         | exn -> return Either.Failure [exn]
 
     }
-
-[<ReflectedDefinition>]
-module Router =
-
-    let add (path : string) (handler : 'a -> unit) =
-        Globals.routie.Invoke(path, handler |> unbox<Function>)
-
-    let navigate (path : string) =
-        Globals.routie.Invoke(path)
