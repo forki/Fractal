@@ -144,7 +144,7 @@ module MaterialDOM =
         | SecondaryText of string
         | SecondaryTextLines of float
         | OnKeyboardFocus of (Component.SyntheticEvent -> bool -> unit)
-        | OnTouchStart of (SyntaxError -> unit)
+        | OnTouchStart of (Component.SyntheticEvent -> unit)
 
     type MenuProps =
         | Attr of DOM.Attr
