@@ -21,7 +21,7 @@ module MaterialDOM =
         | ZDepth of float
         | OnLeftIconButtonTouchTap of (Component.SyntheticEvent -> unit)
         | OnRightIconButtonTouchTap of (Component.SyntheticEvent -> unit)
-         
+
     type AvatarProps =
         | Attr of DOM.Attr
         | Icon of Element
@@ -38,7 +38,7 @@ module MaterialDOM =
         | Label of string
         | Children of Component.DOMElement<obj>
         | LabelStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
         | RippleColor of string
@@ -51,7 +51,7 @@ module MaterialDOM =
         | Label of string
         | Children of Component.DOMElement<obj>
         | LabelStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
         | BackgroundColor of string
@@ -65,7 +65,7 @@ module MaterialDOM =
         | Disabled of bool
         | IconClassName of string
         | IconStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
 

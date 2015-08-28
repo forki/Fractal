@@ -1,3 +1,6 @@
+#r @"packages/FAKE/tools/Microsoft.Web.XmlTransform.dll"
+#r @"packages/FAKE/tools/Newtonsoft.Json.dll"
+#r @"packages/FAKE/tools/NuGet.Core.dll"
 #r @"packages/FAKE/tools/FakeLib.dll"
 
 open Fake
