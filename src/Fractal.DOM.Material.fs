@@ -21,7 +21,7 @@ module MaterialDOM =
         | ZDepth of float
         | OnLeftIconButtonTouchTap of (Component.SyntheticEvent -> unit)
         | OnRightIconButtonTouchTap of (Component.SyntheticEvent -> unit)
-         
+
     type AvatarProps =
         | Attr of DOM.Attr
         | Icon of Element
@@ -38,7 +38,7 @@ module MaterialDOM =
         | Label of string
         | Children of Component.DOMElement<obj>
         | LabelStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
         | RippleColor of string
@@ -51,7 +51,7 @@ module MaterialDOM =
         | Label of string
         | Children of Component.DOMElement<obj>
         | LabelStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
         | BackgroundColor of string
@@ -65,7 +65,7 @@ module MaterialDOM =
         | Disabled of bool
         | IconClassName of string
         | IconStyle of obj //TODO CSS DSL
-        | LinkButon of bool
+        | LinkButton of bool
         | Primary of bool
         | Secondary of bool
 
@@ -144,7 +144,7 @@ module MaterialDOM =
         | SecondaryText of string
         | SecondaryTextLines of float
         | OnKeyboardFocus of (Component.SyntheticEvent -> bool -> unit)
-        | OnTouchStart of (SyntaxError -> unit)
+        | OnTouchStart of (Component.SyntheticEvent -> unit)
 
     type MenuProps =
         | Attr of DOM.Attr
@@ -242,7 +242,63 @@ module MaterialDOM =
         | Route of string
         | OnActive of (obj -> unit)
 
-    //TODO TABLES PROPS
+    type TableProps =
+        | Attr of DOM.Attr
+        | AllRowsSelected of bool
+        | FixedFooter of bool
+        | FixedHeader of bool
+        | Height of string
+        | MultiSelectable of bool
+        | Selectable of bool
+        | OnRowSelection of Component.DOMElement<obj> []
+        | OnCellClick of (float -> float -> unit)
+        | OnRowHover of (float -> unit)
+        | OnRowHoverExit of (float -> unit)
+        | OnCellHover of (float -> float -> unit)
+        | OnCellHoverExit of (float -> float -> unit)
+
+    type TableHeaderProps =
+        | Attr of DOM.Attr
+        | AdjustForCheckbox of bool
+        | DisplaySelectAll of bool
+        | EnableSelectAll of bool
+        | SelectAllSelected of bool
+        | OnSelectAll of (bool -> unit)
+
+    type TableBodyProps =
+        | Attr of DOM.Attr
+        | AllRowsSelected of bool
+        | DeSelectOnClickAway of bool
+        | DisplayRowCheckbox of bool
+        | MultiSelectable of bool
+        | PreScanRows of bool
+        | Selectable of bool
+        | ShowRowHover of bool
+        | StripedRows of bool
+
+    type TableFooterProps =
+        | Attr of DOM.Attr
+        | AdjustForCheckbox of bool
+
+    type TableRowProps =
+        | Attr of DOM.Attr
+        | DisplayBorder of bool
+        | Hoverable of bool
+        | RowNumber of float
+        | Selectable of bool
+        | Selected of bool
+        | Striped of bool
+
+    type TableHeaderColumnProps =
+        | Attr of DOM.Attr
+        | ColumnNumber of float
+        | Tooltip of string
+        | TooltipStyle of obj
+
+    type TableRowColumnProps =
+        | Attr of DOM.Attr
+        | ColumnNumber of float
+        | Hoverable of bool
 
     type TextFieldProps =
         | Attr of DOM.Attr
@@ -285,6 +341,13 @@ module MaterialDOM =
         static member Slider ((p : SliderProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Slider, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
         static member Checkbox ((p : CheckboxProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Checkbox, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
         static member Snackbar ((p : SnackbarProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Snackbar, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member Table ((p : TableProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Table, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableBody ((p : TableBodyProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableBody, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableFooter ((p : TableFooterProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableFooter, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableHeader ((p : TableHeaderProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableHeader, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableHeaderColumn ((p : TableHeaderColumnProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableHeaderColumn, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableRow ((p : TableRowProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableRow, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
+        static member TableRowColumn ((p : TableRowColumnProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TableRowColumn, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
         static member Tabs ((p : TabsProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Tabs, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
         static member Tab ((p : TabProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.Tab, (attrsToObj p), c ) |> unbox<FractalElement<obj>>
         static member TextField ((p : TextFieldProps[]), [<ParamArray>] c) = Globals.createElement (Globals.mui.TextField, (attrsToObj p), c ) |> unbox<FractalElement<obj>>

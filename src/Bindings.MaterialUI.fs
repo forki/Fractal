@@ -120,12 +120,20 @@ module Extensions =
         member __.RaisedButton with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Ripple)")>]
         member __.Ripple with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.Table)")>]
+        member __.Table with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.TableBody)")>]
+        member __.TableBody with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.TableFooter)")>]
+        member __.TableFooter with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.TableHeader)")>]
         member __.TableHeader with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.TableHeaderColumn)")>]
+        member __.TableHeaderColumn with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.TableRow)")>]
         member __.TableRow with get() : ComponentClass<obj>= failwith "never"
-        [<FunScript.JSEmitInline("({0}.TableRowItem)")>]
-        member __.TableRowItem with get() : ComponentClass<obj>= failwith "never"
+        [<FunScript.JSEmitInline("({0}.TableRowColumn)")>]
+        member __.TableRowColumn with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.Toggle)")>]
         member __.Toggle with get() : ComponentClass<obj>= failwith "never"
         [<FunScript.JSEmitInline("({0}.TextField)")>]
